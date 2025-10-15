@@ -1,51 +1,46 @@
-import java.util.Random;
+import java.util.Scanner;
 
 public class Metodos_4 {
     public static void main(String[] args) {
-        int[] vetor = new int[10];
+        Scanner sc = new Scanner(System.in);
+        double a, b, c, delta;
+        double[] raiz;
 
-        preencher(vetor);
-        imprimir(vetor);
-        System.out.println("Soma dos elementos: " + somar(vetor));
-        System.out.println("Média dos elementos: " + calcularMedia(vetor));
-        System.out.println("Maior valor armazenado: " + maiorValor(vetor)); // Corrigido aqui
-    }
+        System.out.print("a --> ");
+        a = sc.nextDouble();
 
-    public static void preencher(int[] vetor) {
-        Random random = new Random();
+        if (a == 0) {
+            System.out.println("Não é uma equação de segundo grau");
+        } else {
+            System.out.print("b --> ");
+            b = sc.nextDouble();
 
-        for (int i = 0; i < vetor.length; i++) {
-            vetor[i] = random.nextInt(2, 10);
-        }
-    }
+            System.out.print("c --> ");
+            c = sc.nextDouble();
 
-    public static void imprimir(int[] vetor) {
-        for (int valor : vetor) {
-            System.out.print(valor + " ");
-        }
-        System.out.println();
-    }
-
-    public static int somar(int[] vetor) {
-        int total = 0;
-
-        for (int valor : vetor) {
-            total += valor;
-        }
-        return total;
-    }
-
-    public static double calcularMedia(int[] vetor) {
-        return (double) somar(vetor) / vetor.length;
-    }
-
-    public static int maiorValor(int[] vetor) {
-        int maior = Integer.MIN_VALUE;
-        for (int valor : vetor) {
-            if (valor > maior) {
-                maior = valor;
+            delta = calcularDelta(a, b, c);
+            if (delta < 0) {
+                System.out.println("A equação não tem raiz real");
             }
+            else {
+                raiz = calcularRaiz(a, b, delta);
+                System.out.println("x1 = " + raiz[0]);
+                System.out.println("x2 = " + raiz[1]);
+            }
+
         }
-        return maior;
+    }
+
+    public static double calcularDelta(double a, double b, double c) {
+        return b * b - 4 * a * c;
+    }
+
+    public static double[] calcularRaiz(double a, double b, double delta) {
+        double[] raiz = new double[2];
+        raiz[0] = (-b - Math.sqrt(delta)) / (2 * a);
+        raiz[1] = (-b + Math.sqrt(delta)) / (2 * a);
+        return raiz;
     }
 }
+
+
