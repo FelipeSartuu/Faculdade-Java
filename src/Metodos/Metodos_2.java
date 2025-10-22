@@ -1,3 +1,5 @@
+package Metodos;
+
 import java.util.Scanner;
 
 public class Metodos_2 {
